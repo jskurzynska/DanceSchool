@@ -1,0 +1,104 @@
+﻿<Page
+    x:Class="TeamProject.Views.GroupsPageView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TeamProject.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:TeamProject.Controls"
+    mc:Ignorable="d"
+    DataContext="{Binding Path=GroupsPage, Source={StaticResource ViewModelLocator}}">
+ 
+    <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="Selected">
+                    <VisualState.Setters>
+                        <Setter Target="Button.Background" Value="Red" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0">
+                <GradientStop Color="#200000FF" Offset="0.0" />
+                <GradientStop Color="#FF0000FF" Offset="1.0" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width ="*"/>
+            <ColumnDefinition Width ="*"/>
+            <ColumnDefinition Width ="*"/>
+            <ColumnDefinition Width ="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="20,25,20,5">
+            <controls:UserUC Visibility="Visible" />
+        </Grid>
+        <Grid x:Name="back" Grid.Row="0" Grid.Column="3" Margin="0,25,20,5">
+            <Grid.Background>
+                <SolidColorBrush Color="Navy" Opacity="0.8"  />
+            </Grid.Background>
+            <Image Source="../Assets/arrow-80-48.png" Margin="10" />
+            <Button Opacity="0.0" Command="{Binding GoBackCommand}"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+        </Grid>
+        <Grid x:Name="Groups" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="4" Margin="20,10,20,10" >
+            <Grid.Background>
+                <SolidColorBrush Color="Navy" Opacity="0.6"/>
+            </Grid.Background>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Viewbox x:Name="GroupIcon" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Margin="15" 
+                     VerticalAlignment="Center" HorizontalAlignment="Center">
+                <SymbolIcon Symbol="AllApps" Foreground="DarkTurquoise" />
+            </Viewbox>
+            <TextBlock Grid.Row="0" Grid.Column="1"  Padding="5"
+                       Text="Moje grupy" Typography.Capitals="SmallCaps"
+                       FontSize="25" FontWeight="Bold" Foreground="White" 
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+            <TextBlock Grid.Row="1" Grid.Column="1" 
+                       Text="Flashdance Wrocław" 
+                       FontSize="14" FontWeight="Medium" Foreground="DarkTurquoise" 
+                       HorizontalAlignment="Center" VerticalAlignment="Top"  />
+        </Grid>
+        <ListView x:Name="List" ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup, Mode=TwoWay}" 
+                  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="20,0,20,0"
+                  IsItemClickEnabled="True">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel x:Name="Panel" Tag="{Binding}" 
+                                Padding="5" 
+                                BorderBrush="DarkTurquoise" BorderThickness="2">
+                        <StackPanel.Background>
+                            <SolidColorBrush Color="DarkSlateBlue" Opacity="0.5" />
+                        </StackPanel.Background>
+                        <TextBlock Text="{Binding Date}" FontSize="15" FontWeight="Black" Foreground="White" 
+                                       Margin="0,3,0,3"/>
+                        <TextBlock Text="{Binding Name}" FontSize="12" FontWeight="Bold" Foreground="White"
+                                       Margin="0,3,0,3"/>
+                        <TextBlock Text="{Binding Place}" FontSize="10" Foreground="White" 
+                                       Margin="0,3,0,3"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        
+    </Grid>
+</Page>
