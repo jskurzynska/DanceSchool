@@ -13,6 +13,9 @@ namespace TeamProject.ViewModels
 {
     public class LoggingViewModel
     {
+        //PROBAAA
+
+
         private readonly INavigationService _navigationService;
         private readonly LoginService _loginService;
 
