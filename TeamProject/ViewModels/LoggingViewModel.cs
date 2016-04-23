@@ -13,7 +13,7 @@ namespace TeamProject.ViewModels
 {
     public class LoggingViewModel
     {
-        //PROBAAA
+        //PROBAAA2
 
 
         private readonly INavigationService _navigationService;
