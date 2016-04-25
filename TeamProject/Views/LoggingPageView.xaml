@@ -39,11 +39,12 @@
         <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"
                  Text="{Binding Email, Mode=TwoWay}"
                  Margin="20,10,20,10" 
-                 FontSize="30" />
-        <TextBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
-                 Text="{Binding Password, Mode=TwoWay}"
+                 FontSize="25" 
+                   />
+        <PasswordBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"
+                 Password="{Binding Password, Mode=TwoWay}"
                  Margin="20,10,20,10"
-                 FontSize="30" />
+                 FontSize="25" />
         <Button Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="2"
                  Content="Zaloguj"
                  Margin="20,10,20,10" 
@@ -51,6 +52,6 @@
                  Background="DarkBlue" BorderBrush="DodgerBlue"
                  Foreground="DodgerBlue"
                  FontSize="24" 
-                 Command="{Binding GoToMainPageCommand}"/>
+                 Command="{Binding Login}"/>
     </Grid>
 </Page>

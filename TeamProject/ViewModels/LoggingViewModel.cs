@@ -8,14 +8,12 @@ using Windows.UI.Popups;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using TeamProject.Services;
+using TeamProject.Views;
 
 namespace TeamProject.ViewModels
 {
     public class LoggingViewModel
     {
-        //PROBAAA2
-
-
         private readonly INavigationService _navigationService;
         private readonly LoginService _loginService;
 
@@ -28,7 +26,10 @@ namespace TeamProject.ViewModels
         public string Email { get; set; } 
         public string Password { get; set; }    
 
-        public ICommand GoToMainPageCommand => new RelayCommand(LoginClick);
+        public ICommand Login => new RelayCommand( () =>
+        {
+          LoginClick();
+        });
 
 
         private async void LoginClick()
@@ -38,6 +39,7 @@ namespace TeamProject.ViewModels
                 var result = await _loginService.Login(Email, Password);
                 MessageDialog dialog = new MessageDialog("You are now logged in as " + Email, "Success");
                 dialog.ShowAsync();
+                _navigationService.NavigateTo("MainPage");
             }
             catch (Exception ex)
             {

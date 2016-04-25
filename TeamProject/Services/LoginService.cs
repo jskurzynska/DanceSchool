@@ -5,7 +5,6 @@ using System.Net.Http;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
-using MyWPClient;
 using TeamProject.Models;
 
 namespace TeamProject.Services
@@ -17,11 +16,13 @@ namespace TeamProject.Services
             try
             {
                 var client = GetClient();
-                var query = HttpUtility.ParseQueryString(string.Empty);
-                query.Add(new HttpValue("username", username));
-                query.Add(new HttpValue("password", password));
-
-                var httpResponse = await client.PostAsync("/login", new StringContent(query.ToString(true), Encoding.UTF8));
+                var values = new Dictionary<string,string>
+                {
+                    { "username", username },
+                    { "password", password }
+                };
+                var requestParams = new FormUrlEncodedContent(values);
+                var httpResponse = await client.PostAsync("/api/login", requestParams);
 
                 if (httpResponse.IsSuccessStatusCode)
                 {
