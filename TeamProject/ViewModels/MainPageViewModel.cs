@@ -5,10 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using TeamProject.Models;
+using TeamProject.Services;
 
 namespace TeamProject.ViewModels
 {
@@ -31,7 +34,54 @@ namespace TeamProject.ViewModels
         {
             _navigationService = navigationService;
             CreateGroups();
+            //TODO: Poprawic bo bez sensu
+            Messenger.Default.Register<TrainerModel>(this, user => User = user);
         }
+
+        //TODO: Ogarnac zeby mialo rece i nogi
+        public TrainerModel User
+        {
+            get { return _user; }
+            set
+            {
+                if (_user != value)
+                {
+                    _user = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        private TrainerModel _user = new TrainerModel() {Name = "ASIUNIA"};
+
+        //TODO: rozdzielic powyższy model na to co poniżej
+        /*public string UserName
+        {
+            get { return _userName; }
+            set
+            {
+                if (_userName != value)
+                {
+                    _userName = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        private string _userName;
+
+        public string City
+        {
+            get { return _city; }
+            set
+            {
+                if (_city != value)
+                {
+                    _city = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+        private string _city;
+        */
 
         public void CreateGroups()
         {
@@ -65,7 +115,6 @@ namespace TeamProject.ViewModels
 
             };
         }
-
         public ICommand MyGroupsCommand
         {
             get

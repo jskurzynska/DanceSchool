@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Security;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using TeamProject.Models;
 
 namespace TeamProject.Services
@@ -33,6 +35,11 @@ namespace TeamProject.Services
                 else
                 {
                     string content = await httpResponse.Content.ReadAsStringAsync();
+                    if (content == string.Empty)
+                    {
+                        content = "Invalid username or password.";
+                    }
+                    
                     throw new InvalidOperationException(content);
                 }
             }
@@ -42,5 +49,5 @@ namespace TeamProject.Services
             }
         }
 
-    }
+       }
 }
