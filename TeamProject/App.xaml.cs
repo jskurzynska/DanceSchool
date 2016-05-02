@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using TeamProject.Services;
 using TeamProject.Views;
 
 namespace TeamProject
@@ -76,7 +77,15 @@ namespace TeamProject
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                rootFrame.Navigate(typeof(LoggingPageView), e.Arguments);
+                //TODO: Zrobic tak zeby od razu logowalo jesli jest token
+                //if (AppService.LocalSettings.Values["loginToken"] == null)
+                //{
+                    rootFrame.Navigate(typeof(LoggingPageView), e.Arguments);
+                //}
+                //else
+                //{
+                //    rootFrame.Navigate(typeof(MainPageView), e.Arguments);
+                //}
             }
             // Ensure the current window is active
             Window.Current.Activate();

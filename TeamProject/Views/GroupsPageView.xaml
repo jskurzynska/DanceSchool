@@ -73,7 +73,7 @@
                        FontSize="14" FontWeight="Medium" Foreground="DarkTurquoise" 
                        HorizontalAlignment="Center" VerticalAlignment="Top"  />
         </Grid>
-        <ListView x:Name="List" ItemsSource="{Binding Groups}" SelectedItem="{Binding SelectedGroup, Mode=TwoWay}" 
+        <ListView x:Name="List" ItemsSource="{Binding Groups, Mode=TwoWay}" SelectedItem="{Binding SelectedGroup, Mode=TwoWay}" 
                   Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="20,0,20,0"
                   IsItemClickEnabled="True">
             <ListView.ItemContainerStyle>
@@ -89,9 +89,11 @@
                         <StackPanel.Background>
                             <SolidColorBrush Color="DarkSlateBlue" Opacity="0.5" />
                         </StackPanel.Background>
-                        <TextBlock Text="{Binding Date}" FontSize="15" FontWeight="Black" Foreground="White" 
+                        <TextBlock Text="{Binding Time}" FontSize="15" FontWeight="Black" Foreground="White" 
                                        Margin="0,3,0,3"/>
-                        <TextBlock Text="{Binding Name}" FontSize="12" FontWeight="Bold" Foreground="White"
+                        <TextBlock Text="{Binding Day}" FontSize="15" FontWeight="Black" Foreground="White" 
+                                       Margin="0,3,0,3"/>
+                        <TextBlock Text="{Binding GroupName}" FontSize="12" FontWeight="Bold" Foreground="White"
                                        Margin="0,3,0,3"/>
                         <TextBlock Text="{Binding Place}" FontSize="10" Foreground="White" 
                                        Margin="0,3,0,3"/>

@@ -31,7 +31,8 @@ namespace TeamProject.ViewModels
         public GroupsViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            CreateGroups();
+            Messenger.Default.Register<ObservableCollection<GroupModel>>(this, groups => Groups = groups);
+            // CreateGroups();
         }
 
         public void CreateGroups()
@@ -41,43 +42,49 @@ namespace TeamProject.ViewModels
             {
                 new GroupModel
                 {
-                    Name = "Rumba grupa początkująca ",
-                    Date = "Środa 16:45-17:15",
+                    GroupName = "Rumba grupa początkująca ",
+                    Day = "Środa",
+                    Time = " 16:45-17:15",
                     Place = "ul. Piłsudzkiego 34/1",
                     Participants = CreateParticipants()
                 },
                 new GroupModel
                 {
-                    Name = "Salsa grupa początkująca ",
-                    Date = "Środa 16:45-17:15",
+                    GroupName = "Salsa grupa początkująca ",
+                    Day = "Środa",
+                    Time = " 16:45-17:15",
                     Place = "ul. Piłsudzkiego 34/1",
                     Participants = CreateParticipants()
                 },
                 new GroupModel
                 {
-                    Name = "Salsa grupa początkująca ",
-                    Date = "Środa 16:45-17:15",
+                    GroupName = "Salsa grupa początkująca ",
+                    Day = "Środa",
+                    Time = " 16:45-17:15",
                     Place = "ul. Piłsudzkiego 34/1",
                     Participants = CreateParticipants()
                 },
                 new GroupModel
                 {
-                    Name = "Taniec towarzyski grupa początkująca ",
-                    Date = "Poniedziałek 16:45-17:15",
+                    GroupName = "Taniec towarzyski grupa początkująca ",
+                    Day = "Poniedziałek",
+                    Time = " 16:45-17:15",
                     Place = "ul. Piłsudzkiego 34/1",
                     Participants = CreateParticipants()
                 },
                  new GroupModel
                 {
-                    Name = "Salsa grupa początkująca ",
-                    Date = "Środa 16:45-17:15",
+                    GroupName = "Salsa grupa początkująca ",
+                    Day = "Środa",
+                    Time = " 16:45-17:15",
                     Place = "ul. Piłsudzkiego 34/1",
                     Participants = CreateParticipants()
                 },
                 new GroupModel
                 {
-                    Name = "Salsa grupa początkująca ",
-                    Date = "Środa 16:45-17:15",
+                    GroupName = "Salsa grupa początkująca ",
+                    Day = "Środa",
+                    Time = " 16:45-17:15",
                     Place = "ul. Piłsudzkiego 34/1",
                     Participants = CreateParticipants()
                 }

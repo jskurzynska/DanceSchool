@@ -56,7 +56,6 @@ namespace TeamProject.ViewModels
                 MessageDialog dialog = new MessageDialog("You are now logged in as " + Email, "Success");
                 await dialog.ShowAsync();
                 GetUserData();
-                Messenger.Default.Send(TrainerModel);
                 _navigationService.NavigateTo("MainPage");
             }
             catch (Exception ex)

@@ -20,8 +20,11 @@ namespace TeamProject.Models
             get { return _name; }
             set
             {
-                _name = value;
-                RaisePropertyChanged("Name");
+                if (_name != value)
+                {
+                    _name = value;
+                    RaisePropertyChanged(nameof(Name));
+                }
             }
         }
 

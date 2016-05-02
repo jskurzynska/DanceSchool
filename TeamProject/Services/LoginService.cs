@@ -20,8 +20,8 @@ namespace TeamProject.Services
                 var client = GetClient();
                 var values = new Dictionary<string,string>
                 {
-                    { "username", username },
-                    { "password", password }
+                    ["username"] = username ,
+                    ["password"]= password 
                 };
                 var requestParams = new FormUrlEncodedContent(values);
                 var httpResponse = await client.PostAsync("/api/login", requestParams);
@@ -29,6 +29,7 @@ namespace TeamProject.Services
                 if (httpResponse.IsSuccessStatusCode)
                 {
                     var result = await httpResponse.Content.ReadAsStringAsync();
+                    AppService.SaveTokenInAppSettings(result);
                     LoginSession.Token = result;
                     return result;
                 }

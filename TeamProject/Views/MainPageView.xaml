@@ -56,8 +56,9 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <StackPanel x:Name="Panel" >
-                                <TextBlock Text="{Binding Date}" FontSize="12" FontWeight="Medium" Foreground="White" />
-                                <TextBlock Text="{Binding Name}" FontSize="10" Foreground="White" />
+                                <TextBlock Text="{Binding Time}" FontSize="12" FontWeight="Medium" Foreground="White" />
+                                <TextBlock Text="{Binding Day}" FontSize="12" FontWeight="Medium" Foreground="White" />
+                                <TextBlock Text="{Binding GroupName}" FontSize="10" Foreground="White" />
                                 <TextBlock Text="{Binding Place}" FontSize="8" Foreground="White" />
                             </StackPanel>
                         </DataTemplate>

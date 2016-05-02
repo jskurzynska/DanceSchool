@@ -18,6 +18,7 @@ namespace TeamProject.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
+        private readonly GetDataService _getDataService = new GetDataService();
         private ObservableCollection<GroupModel> _nearestGroups  = new ObservableCollection<GroupModel>();
 
         public ObservableCollection<GroupModel> NearestGroups
@@ -30,12 +31,39 @@ namespace TeamProject.ViewModels
             }
         }
 
+        private ObservableCollection<GroupModel> _groups = new ObservableCollection<GroupModel>();
+
+        public ObservableCollection<GroupModel> Groups
+        {
+            get { return _groups; }
+            set
+            {
+                _groups = value;
+                RaisePropertyChanged();
+                Messenger.Default.Send(Groups);
+            }
+        }
+
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
             CreateGroups();
+          // GetGroups();
             //TODO: Poprawic bo bez sensu
-            Messenger.Default.Register<TrainerModel>(this, user => User = user);
+            // Messenger.Default.Register<TrainerModel>(this, user => User = user);
+        }
+
+        private async void GetGroups()
+        {
+            try
+            {
+                Groups = await _getDataService.GetGroupsInfo();
+            }
+            catch (Exception)
+            {
+               
+                throw;
+            }  
         }
 
         //TODO: Ogarnac zeby mialo rece i nogi
@@ -90,26 +118,30 @@ namespace TeamProject.ViewModels
             {
                 new GroupModel
                 {
-                    Name = "Salsa grupa początkująca ",
-                    Date = "Środa 16:45-17:15",
+                    GroupName = "Salsa grupa początkująca ",
+                    Day = "Środa",
+                    Time = "16:45-17:15",
                     Place = "ul. Piłsudzkiego 34/1"
                 },
                 new GroupModel
                 {
-                    Name = "Salsa grupa początkująca ",
-                    Date = "Środa 16:45-17:15",
+                    GroupName = "Salsa grupa początkująca ",
+                    Day = "Środa",
+                    Time = "16:45-17:15",
                     Place = "ul. Piłsudzkiego 34/1"
                 },
                 new GroupModel
                 {
-                    Name = "Salsa grupa początkująca ",
-                    Date = "Środa 16:45-17:15",
+                    GroupName = "Salsa grupa początkująca ",
+                    Day = "Środa",
+                    Time = "16:45-17:15",
                     Place = "ul. Piłsudzkiego 34/1"
                 },
                 new GroupModel
                 {
-                    Name = "Taniec towarzyski grupa początkująca ",
-                    Date = "Poniedziałek 16:45-17:15",
+                    GroupName = "Taniec towarzyski grupa początkująca ",
+                    Day = "Poniedziałek",
+                    Time = " 16:45-17:15",
                     Place = "ul. Piłsudzkiego 34/1"
                 }
 
@@ -121,6 +153,7 @@ namespace TeamProject.ViewModels
             {
                 return new RelayCommand(() =>
                 {
+                    GetGroups();
                     _navigationService.NavigateTo("GroupsPage");
                 });
             }

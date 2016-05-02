@@ -241,7 +241,7 @@
                 <TextBlock Text="{Binding Group.Date, Mode=TwoWay}" FontSize="15" FontWeight="Black" Foreground="White" 
                            Margin="0,3,0,3"
                            HorizontalAlignment="Center"/>
-                <TextBlock Text="{Binding Group.Name, Mode=TwoWay}" FontSize="12" FontWeight="Bold" Foreground="White"
+                <TextBlock Text="{Binding Group.GroupName, Mode=TwoWay}" FontSize="12" FontWeight="Bold" Foreground="White"
                            Margin="0,3,0,3"
                            HorizontalAlignment="Center"/>
                 <TextBlock Text="{Binding Group.Place, Mode=TwoWay}" FontSize="10" Foreground="White" 
