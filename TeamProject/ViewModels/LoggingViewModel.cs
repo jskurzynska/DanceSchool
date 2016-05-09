@@ -10,6 +10,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using TeamProject.Models;
+using TeamProject.Repositories;
 using TeamProject.Services;
 using TeamProject.Views;
 
@@ -20,8 +21,8 @@ namespace TeamProject.ViewModels
         private readonly INavigationService _navigationService;
         private readonly GetDataService _getDataService;
         private readonly LoginService _loginService;
+        private readonly DbService _dbService = new DbService();
         
-
         public LoggingViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
@@ -31,17 +32,6 @@ namespace TeamProject.ViewModels
 
         public string Email { get; set; } 
         public string Password { get; set; }
-
-        private TrainerModel _trainerModel = new TrainerModel();
-        public TrainerModel TrainerModel
-        {
-            get { return _trainerModel; }
-            set
-            {
-                _trainerModel = value;
-                RaisePropertyChanged();
-            }
-        }
 
         public ICommand Login => new RelayCommand( () =>
         {
@@ -69,9 +59,10 @@ namespace TeamProject.ViewModels
         {
             try
             {
-                TrainerModel = await _getDataService.GetTrainerInfo();
-                MessageDialog dialog = new MessageDialog("Hello " + TrainerModel.Name, "Success");
-                await dialog.ShowAsync();
+                _dbService.CreateDb();
+                TrainerModel trainer = await _getDataService.GetTrainerInfo();
+                Repository<TrainerModel> trainerRepository = new Repository<TrainerModel>(DbService.DbConn);
+                trainerRepository.Add(trainer);
             }
             catch (Exception ex)
             {

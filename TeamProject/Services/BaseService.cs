@@ -35,10 +35,10 @@ namespace TeamProject.Services
                 BaseAddress = new Uri(GetServiceAddress())          
             };
 
-            if (LoginSession.Token != null)
+            if (AppService.LocalSettings.Values["loginToken"] != null)
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization",
-                    String.Format("Bearer {0}", LoginSession.Token));
+                    String.Format("Bearer {0}", AppService.LocalSettings.Values["loginToken"]));
             }
             return client;
         }

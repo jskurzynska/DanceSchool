@@ -13,6 +13,7 @@ namespace TeamProject.Services
 {
     public class LoginService: BaseService
     {
+        //task awaitowalny voidowy
         public async Task<string> Login(string username, string password)
         {
             try
@@ -30,7 +31,6 @@ namespace TeamProject.Services
                 {
                     var result = await httpResponse.Content.ReadAsStringAsync();
                     AppService.SaveTokenInAppSettings(result);
-                    LoginSession.Token = result;
                     return result;
                 }
                 else

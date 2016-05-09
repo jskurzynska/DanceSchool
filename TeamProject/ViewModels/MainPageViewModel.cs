@@ -11,6 +11,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using TeamProject.Models;
+using TeamProject.Repositories;
 using TeamProject.Services;
 
 namespace TeamProject.ViewModels
@@ -19,7 +20,16 @@ namespace TeamProject.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly GetDataService _getDataService = new GetDataService();
-        private ObservableCollection<GroupModel> _nearestGroups  = new ObservableCollection<GroupModel>();
+        private ObservableCollection<GroupModel> _nearestGroups = new ObservableCollection<GroupModel>();
+        private Repository<TrainerModel> trainerRepository = new Repository<TrainerModel>(DbService.DbConn);
+
+        public MainPageViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+            User = trainerRepository.GetFirstItem();
+            CreateGroups();
+            // GetGroups();
+        }
 
         public ObservableCollection<GroupModel> NearestGroups
         {
@@ -44,29 +54,13 @@ namespace TeamProject.ViewModels
             }
         }
 
-        public MainPageViewModel(INavigationService navigationService)
-        {
-            _navigationService = navigationService;
-            CreateGroups();
-          // GetGroups();
-            //TODO: Poprawic bo bez sensu
-            // Messenger.Default.Register<TrainerModel>(this, user => User = user);
-        }
+        
 
         private async void GetGroups()
         {
-            try
-            {
-                Groups = await _getDataService.GetGroupsInfo();
-            }
-            catch (Exception)
-            {
-               
-                throw;
-            }  
+            Groups = await _getDataService.GetGroupsInfo();
         }
 
-        //TODO: Ogarnac zeby mialo rece i nogi
         public TrainerModel User
         {
             get { return _user; }
@@ -79,7 +73,8 @@ namespace TeamProject.ViewModels
                 }
             }
         }
-        private TrainerModel _user = new TrainerModel() {Name = "ASIUNIA"};
+
+        private TrainerModel _user;
 
         //TODO: rozdzielic powyższy model na to co poniżej
         /*public string UserName
@@ -165,7 +160,7 @@ namespace TeamProject.ViewModels
             {
                 return new RelayCommand(() =>
                 {
-                    _navigationService.GoBack();
+                    _navigationService.NavigateTo("LoggingPage"); 
                 });
             }
         }

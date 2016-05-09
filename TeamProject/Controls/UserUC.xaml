@@ -5,7 +5,7 @@
     xmlns:local="using:TeamProject.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    DataContext="{Binding Path=LoggingPage, Source={StaticResource ViewModelLocator}}"
+    DataContext="{Binding Path=MainPage, Source={StaticResource ViewModelLocator}}"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
@@ -22,7 +22,7 @@
             <SolidColorBrush Color="DarkTurquoise" Opacity="0.6"  />
         </Grid.Background>
         <TextBlock x:Name="name" Grid.Row="0" Grid.Column="1"
-                   Text ="{Binding TrainerModel.Name, Mode=TwoWay}"  FontSize="16" FontWeight="Medium" Foreground="Navy" 
+                   Text ="{Binding User.Name, Mode=TwoWay}"  FontSize="16" FontWeight="Medium" Foreground="Navy" 
                    Typography.Capitals="SmallCaps"
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock x:Name="school" Grid.Row="1" Grid.Column="1"  

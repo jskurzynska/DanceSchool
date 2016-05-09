@@ -18,7 +18,7 @@ namespace TeamProject.Services
             try
             {
                 var client = GetClient();
-                client.DefaultRequestHeaders.Add("token", LoginSession.Token);
+                client.DefaultRequestHeaders.Add("token", (string)AppService.LocalSettings.Values["loginToken"]);
 
                 var httpResponse = await client.GetAsync("/api/userData");
 

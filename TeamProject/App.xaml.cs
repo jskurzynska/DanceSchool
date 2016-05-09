@@ -78,14 +78,14 @@ namespace TeamProject
                 // configuring the new page by passing required information as a navigation
                 // parameter
                 //TODO: Zrobic tak zeby od razu logowalo jesli jest token
-                //if (AppService.LocalSettings.Values["loginToken"] == null)
-                //{
+                if (AppService.LocalSettings.Values["loginToken"] == null)
+                {
                     rootFrame.Navigate(typeof(LoggingPageView), e.Arguments);
-                //}
-                //else
-                //{
-                //    rootFrame.Navigate(typeof(MainPageView), e.Arguments);
-                //}
+                }
+                else
+                {
+                    rootFrame.Navigate(typeof(MainPageView), e.Arguments);
+                }
             }
             // Ensure the current window is active
             Window.Current.Activate();

@@ -10,6 +10,8 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
+using TeamProject.Repositories;
+using TeamProject.Services;
 
 namespace TeamProject.ViewModels
 {

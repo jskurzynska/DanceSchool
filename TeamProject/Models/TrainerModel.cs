@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using SQLite.Net.Attributes;
 
 namespace TeamProject.Models
 {
@@ -12,6 +13,7 @@ namespace TeamProject.Models
         private string _name;
 
         [JsonProperty("id")]
+        [PrimaryKey]
         public int Id { get; set; }
 
         [JsonProperty("frontName")]
