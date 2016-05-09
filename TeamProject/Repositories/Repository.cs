@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,7 +35,7 @@ namespace TeamProject.Repositories
 
         public IEnumerable<T> GetAll()
         {
-            return Context.Table<T>().ToList();
+            return GetFirstItem() == null ? null : Context.Table<T>().ToList();
         }
     }
 }

@@ -42,7 +42,7 @@ namespace TeamProject
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
 
 #if DEBUG
@@ -77,13 +77,17 @@ namespace TeamProject
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                //TODO: Zrobic tak zeby od razu logowalo jesli jest token
                 if (AppService.LocalSettings.Values["loginToken"] == null)
                 {
                     rootFrame.Navigate(typeof(LoggingPageView), e.Arguments);
                 }
                 else
                 {
+                    ManageRepositoriesService manageRepositories = new ManageRepositoriesService();
+                    if (!manageRepositories.CheckIfTrainerDataExists())
+                    {
+                        await manageRepositories.GetUserData();
+                    }
                     rootFrame.Navigate(typeof(MainPageView), e.Arguments);
                 }
             }

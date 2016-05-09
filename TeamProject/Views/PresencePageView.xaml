@@ -271,14 +271,14 @@
                         <StackPanel Grid.Column="1" 
                                     Padding="5"
                                     Orientation="Horizontal"
-                                    Background="{Binding HasTicket, Mode=OneWay, Converter={StaticResource ColorConverter}}" >
-                            <TextBlock Text="{Binding FirstName}"
+                                    Background="{Binding VoucherValid, Mode=OneWay, Converter={StaticResource ColorConverter}}" >
+                            <TextBlock Text="{Binding Name}"
                                        Margin="0,0,3,0"/>
                             <TextBlock Text="{Binding LastName}"/>
-                            <TextBlock Text="{Binding IsPresent}"
+                            <TextBlock Text="{Binding Present}"
                                        Margin="3,0,3,0"/>
                         </StackPanel>
-                        <CheckBox IsChecked="{Binding IsPresent, Mode=TwoWay}"
+                        <CheckBox IsChecked="{Binding Present, Mode=TwoWay}"
                                       Grid.Column="2"
                                       HorizontalAlignment="Stretch"
                                       Margin="5,0,0,0"

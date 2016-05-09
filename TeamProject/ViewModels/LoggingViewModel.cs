@@ -19,33 +19,31 @@ namespace TeamProject.ViewModels
     public class LoggingViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        private readonly GetDataService _getDataService;
-        private readonly LoginService _loginService;
-        private readonly DbService _dbService = new DbService();
-        
+        private readonly LoginService _loginService = new LoginService();
+        private readonly ManageRepositoriesService _manageRepositoriesService = new ManageRepositoriesService();
+       
         public LoggingViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            _loginService = new LoginService();
-            _getDataService = new GetDataService();
         }
 
         public string Email { get; set; } 
         public string Password { get; set; }
 
-        public ICommand Login => new RelayCommand( () =>
+        public ICommand Login => new RelayCommand(async () =>
         {
-          LoginClick();
+            await LoginClick();
         });
 
-        private async void LoginClick()
+        private async Task LoginClick()
         {
             try
             {
-                var result = await _loginService.Login(Email, Password);
+                await _loginService.Login(Email, Password);
                 MessageDialog dialog = new MessageDialog("You are now logged in as " + Email, "Success");
                 await dialog.ShowAsync();
-                GetUserData();
+                await _manageRepositoriesService.GetUserData();
+                await _manageRepositoriesService.GetGroups();
                 _navigationService.NavigateTo("MainPage");
             }
             catch (Exception ex)
@@ -55,21 +53,6 @@ namespace TeamProject.ViewModels
             }
         }
 
-        private async void GetUserData()
-        {
-            try
-            {
-                _dbService.CreateDb();
-                TrainerModel trainer = await _getDataService.GetTrainerInfo();
-                Repository<TrainerModel> trainerRepository = new Repository<TrainerModel>(DbService.DbConn);
-                trainerRepository.Add(trainer);
-            }
-            catch (Exception ex)
-            {
-                MessageDialog dialog = new MessageDialog(ex.Message, "Error");
-                await dialog.ShowAsync();
-            }
-
-        }
+       
     }
 }

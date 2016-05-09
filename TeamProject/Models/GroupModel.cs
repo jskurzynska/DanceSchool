@@ -105,19 +105,20 @@ namespace TeamProject.Models
             }
         }
 
-        public ObservableCollection<ParticipantModel> Participants 
-        {
-            get { return _participants; }
-            set
-            {
-                if (_participants != value)
-                {
-                    _participants = value;
-                    RaisePropertyChanged(nameof(Participants));
-                }        
-            }
-        }
+        //TODO: czyli w konkretnej grupie nie ma listy?
+        //public ObservableCollection<ParticipantModel> Participants 
+        //{
+        //    get { return _participants; }
+        //    set
+        //    {
+        //        if (_participants != value)
+        //        {
+        //            _participants = value;
+        //            RaisePropertyChanged(nameof(Participants));
+        //        }        
+        //    }
+        //}
 
-        private ObservableCollection<ParticipantModel> _participants  = new ObservableCollection<ParticipantModel>();
+        //private ObservableCollection<ParticipantModel> _participants  = new ObservableCollection<ParticipantModel>();
     }
 }

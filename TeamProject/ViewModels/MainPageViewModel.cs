@@ -19,16 +19,14 @@ namespace TeamProject.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        private readonly GetDataService _getDataService = new GetDataService();
         private ObservableCollection<GroupModel> _nearestGroups = new ObservableCollection<GroupModel>();
-        private Repository<TrainerModel> trainerRepository = new Repository<TrainerModel>(DbService.DbConn);
+        private readonly ManageRepositoriesService _manageRepositoriesService = new ManageRepositoriesService();
 
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
-            User = trainerRepository.GetFirstItem();
+            UserName = _manageRepositoriesService.TrainerRepository.GetFirstItem();
             CreateGroups();
-            // GetGroups();
         }
 
         public ObservableCollection<GroupModel> NearestGroups
@@ -41,43 +39,7 @@ namespace TeamProject.ViewModels
             }
         }
 
-        private ObservableCollection<GroupModel> _groups = new ObservableCollection<GroupModel>();
-
-        public ObservableCollection<GroupModel> Groups
-        {
-            get { return _groups; }
-            set
-            {
-                _groups = value;
-                RaisePropertyChanged();
-                Messenger.Default.Send(Groups);
-            }
-        }
-
-        
-
-        private async void GetGroups()
-        {
-            Groups = await _getDataService.GetGroupsInfo();
-        }
-
-        public TrainerModel User
-        {
-            get { return _user; }
-            set
-            {
-                if (_user != value)
-                {
-                    _user = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        private TrainerModel _user;
-
-        //TODO: rozdzielic powyższy model na to co poniżej
-        /*public string UserName
+        public TrainerModel UserName
         {
             get { return _userName; }
             set
@@ -89,22 +51,8 @@ namespace TeamProject.ViewModels
                 }
             }
         }
-        private string _userName;
 
-        public string City
-        {
-            get { return _city; }
-            set
-            {
-                if (_city != value)
-                {
-                    _city = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-        private string _city;
-        */
+        private TrainerModel _userName;
 
         public void CreateGroups()
         {
@@ -146,9 +94,9 @@ namespace TeamProject.ViewModels
         {
             get
             {
-                return new RelayCommand(() =>
+                return new RelayCommand(async () =>
                 {
-                    GetGroups();
+                    await _manageRepositoriesService.GetGroups();
                     _navigationService.NavigateTo("GroupsPage");
                 });
             }
@@ -160,6 +108,7 @@ namespace TeamProject.ViewModels
             {
                 return new RelayCommand(() =>
                 {
+                    AppService.DeleteTokenFromAppSettings();
                     _navigationService.NavigateTo("LoggingPage"); 
                 });
             }

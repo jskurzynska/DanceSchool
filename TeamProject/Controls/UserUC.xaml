@@ -22,7 +22,7 @@
             <SolidColorBrush Color="DarkTurquoise" Opacity="0.6"  />
         </Grid.Background>
         <TextBlock x:Name="name" Grid.Row="0" Grid.Column="1"
-                   Text ="{Binding User.Name, Mode=TwoWay}"  FontSize="16" FontWeight="Medium" Foreground="Navy" 
+                   Text ="{Binding UserName.Name, Mode=TwoWay}"  FontSize="16" FontWeight="Medium" Foreground="Navy" 
                    Typography.Capitals="SmallCaps"
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <TextBlock x:Name="school" Grid.Row="1" Grid.Column="1"  

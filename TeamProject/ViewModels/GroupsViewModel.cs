@@ -18,8 +18,15 @@ namespace TeamProject.ViewModels
     public class GroupsViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
-        private ObservableCollection<GroupModel> _groups = new ObservableCollection<GroupModel>();
+        private readonly ManageRepositoriesService _manageRepositoriesService = new ManageRepositoriesService();
 
+        public GroupsViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+            Groups = new ObservableCollection<GroupModel>(_manageRepositoriesService.GroupRepository.GetAll());
+        }
+
+        private ObservableCollection<GroupModel> _groups;
         public ObservableCollection<GroupModel> Groups
         {
             get { return _groups; }
@@ -28,105 +35,6 @@ namespace TeamProject.ViewModels
                 _groups = value;
                 RaisePropertyChanged();
             }
-        }
-
-        public GroupsViewModel(INavigationService navigationService)
-        {
-            _navigationService = navigationService;
-            Messenger.Default.Register<ObservableCollection<GroupModel>>(this, groups => Groups = groups);
-            // CreateGroups();
-        }
-
-        public void CreateGroups()
-        {
-
-            Groups = new ObservableCollection<GroupModel>()
-            {
-                new GroupModel
-                {
-                    GroupName = "Rumba grupa początkująca ",
-                    Day = "Środa",
-                    Time = " 16:45-17:15",
-                    Place = "ul. Piłsudzkiego 34/1",
-                    Participants = CreateParticipants()
-                },
-                new GroupModel
-                {
-                    GroupName = "Salsa grupa początkująca ",
-                    Day = "Środa",
-                    Time = " 16:45-17:15",
-                    Place = "ul. Piłsudzkiego 34/1",
-                    Participants = CreateParticipants()
-                },
-                new GroupModel
-                {
-                    GroupName = "Salsa grupa początkująca ",
-                    Day = "Środa",
-                    Time = " 16:45-17:15",
-                    Place = "ul. Piłsudzkiego 34/1",
-                    Participants = CreateParticipants()
-                },
-                new GroupModel
-                {
-                    GroupName = "Taniec towarzyski grupa początkująca ",
-                    Day = "Poniedziałek",
-                    Time = " 16:45-17:15",
-                    Place = "ul. Piłsudzkiego 34/1",
-                    Participants = CreateParticipants()
-                },
-                 new GroupModel
-                {
-                    GroupName = "Salsa grupa początkująca ",
-                    Day = "Środa",
-                    Time = " 16:45-17:15",
-                    Place = "ul. Piłsudzkiego 34/1",
-                    Participants = CreateParticipants()
-                },
-                new GroupModel
-                {
-                    GroupName = "Salsa grupa początkująca ",
-                    Day = "Środa",
-                    Time = " 16:45-17:15",
-                    Place = "ul. Piłsudzkiego 34/1",
-                    Participants = CreateParticipants()
-                }
-            };          
-        }
-
-        public ObservableCollection<ParticipantModel> CreateParticipants()
-        {
-            return new ObservableCollection<ParticipantModel>()
-           {
-               new ParticipantModel
-               {
-                   FirstName = "Joanna",
-                   LastName = "Skurzyńska",
-                   IsPresent = false,
-                   HasTicket = true
-               },
-               new ParticipantModel
-               {
-                   FirstName = "Tomasz",
-                   LastName = "Rojek",
-                   HasTicket = false
-               },
-               new ParticipantModel
-               {
-                   FirstName = "Alicja",
-                   LastName = "Majewska"
-               },
-               new ParticipantModel
-               {
-                   FirstName = "Jakub",
-                   LastName = "Dymon"
-               },
-               new ParticipantModel
-               {
-                   FirstName = "Bartosz",
-                   LastName = "Haliniak"
-               }
-           };
-
         }
 
         private GroupModel _selectedGroup;

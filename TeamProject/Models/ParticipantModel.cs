@@ -4,80 +4,77 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
+using Newtonsoft.Json;
+using SQLite.Net.Attributes;
 
 namespace TeamProject.Models
 {
     public class ParticipantModel : BaseModel
     {
-        private string _firstName;
-        public string FirstName
+        [JsonProperty("id")]
+        [PrimaryKey]
+        public int Id { get; set; }
+
+        private string _name;
+        [JsonProperty("name")]
+        public string Name
         {
-            get { return _firstName; }
+            get { return _name; }
             set
             {
-                if (_firstName != value)
+                if (_name != value)
                 {
-                    _firstName = value;
-                    RaisePropertyChanged("FirstName");
+                    _name = value;
+                    RaisePropertyChanged("Name");
                 }
             }
         }
 
-        private string _lastName;
-        public string LastName
+        //TODO: To jest dobrze?
+        private bool _present;
+        [JsonProperty("present")]
+        public bool? Present
         {
-            get { return _lastName; }
+            get { return _present; }
             set
             {
-                if (_lastName != value)
+                if (_present != value)
                 {
-                    _lastName = value;
-                    RaisePropertyChanged("LastName");
-                }
-            }
-        }
-        private bool _isPresent;
-        public bool IsPresent
-        {
-            get { return _isPresent; }
-            set
-            {
-                if (_isPresent != value)
-                {
-                    _isPresent = value;
-                    RaisePropertyChanged("IsPresent");
+                    if (value != null) _present = (bool) value;
+                    RaisePropertyChanged("Present");
                 }
             }
         }
 
-        private bool _hasTicket;
-        public bool HasTicket
+        private bool _voucherValid;
+        [JsonProperty("voucherValid")]
+        public bool VoucherValid
         {
-            get { return _hasTicket; }
+            get { return _voucherValid; }
             set
             {
-                if (_hasTicket != value)
+                if (_voucherValid != value)
                 {
-                    _hasTicket = value;
-                    RaisePropertyChanged("HasTicket");
+                    _voucherValid = value;
+                    RaisePropertyChanged("VoucherValid");
                 }
             }
         }
 
-        private PaymentModel _payment = new PaymentModel();
+        //private PaymentModel _payment = new PaymentModel();
 
-        public PaymentModel Payment
-        {
-            get { return _payment; }
-            set
-            {
-                if (_payment != value)
-                {
-                    _payment = value;
-                    RaisePropertyChanged("Payment");
-                }
-            }
-        }
+        //public PaymentModel Payment
+        //{
+        //    get { return _payment; }
+        //    set
+        //    {
+        //        if (_payment != value)
+        //        {
+        //            _payment = value;
+        //            RaisePropertyChanged("Payment");
+        //        }
+        //    }
+        //}
 
 
     }

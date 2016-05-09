@@ -13,8 +13,7 @@ namespace TeamProject.Services
 {
     public class LoginService: BaseService
     {
-        //task awaitowalny voidowy
-        public async Task<string> Login(string username, string password)
+        public async Task Login(string username, string password)
         {
             try
             {
@@ -31,11 +30,10 @@ namespace TeamProject.Services
                 {
                     var result = await httpResponse.Content.ReadAsStringAsync();
                     AppService.SaveTokenInAppSettings(result);
-                    return result;
                 }
                 else
                 {
-                    string content = await httpResponse.Content.ReadAsStringAsync();
+                    var content = await httpResponse.Content.ReadAsStringAsync();
                     if (content == string.Empty)
                     {
                         content = "Invalid username or password.";

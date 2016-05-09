@@ -24,7 +24,7 @@ namespace TeamProject.Services
             using (var dbConnection = DbConn)
             {
                 dbConnection.CreateTable<TrainerModel>();
-               // dbConnection.CreateTable<GroupModel>();
+                dbConnection.CreateTable<GroupModel>();
                 //dbConnection.CreateTable<ParticipantModel>();
             }
         }

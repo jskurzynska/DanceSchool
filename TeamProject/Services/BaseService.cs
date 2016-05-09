@@ -35,6 +35,7 @@ namespace TeamProject.Services
                 BaseAddress = new Uri(GetServiceAddress())          
             };
 
+
             if (AppService.LocalSettings.Values["loginToken"] != null)
             {
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization",

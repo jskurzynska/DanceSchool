@@ -16,5 +16,10 @@ namespace TeamProject.Services
             LocalSettings.Values["loginToken"] = token;
         }
 
+        public static void DeleteTokenFromAppSettings()
+        {
+            LocalSettings.Values["loginToken"] = null;
+        }
+
     }
 }
