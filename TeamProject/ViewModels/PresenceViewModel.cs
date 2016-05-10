@@ -20,20 +20,37 @@ namespace TeamProject.ViewModels
         public PresenceViewModel(INavigationService navigationService) 
         {
             _navigationService = navigationService;
-            Messenger.Default.Register<GroupModel>(this, group => Group = group);
+            //Messenger.Default.Register<ObservableCollection<ParticipantModel>>(this, participants => Participants = participants);
+           Messenger.Default.Register<Tuple<GroupModel, ObservableCollection<ParticipantModel>>>(this, data =>
+           {
+               Group = data.Item1;
+               Participants = data.Item2;
+           }); 
         }
 
-        private GroupModel _group = new GroupModel();
+        private GroupModel _group;
+
         public GroupModel Group
         {
             get { return _group; }
             set
             {
-                _group = value;
+                _group = value; 
                 RaisePropertyChanged();
             }
         }
 
+
+        private ObservableCollection<ParticipantModel> _participants = new ObservableCollection<ParticipantModel>();
+        public ObservableCollection<ParticipantModel> Participants
+        {
+            get { return _participants; }
+            set
+            {
+                _participants = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public ICommand GoBackCommand
         {

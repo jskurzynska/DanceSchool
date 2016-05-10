@@ -238,7 +238,10 @@
                 <SolidColorBrush Color="DarkSlateBlue" Opacity="0.5" />
             </Grid.Background>
             <StackPanel>
-                <TextBlock Text="{Binding Group.Date, Mode=TwoWay}" FontSize="15" FontWeight="Black" Foreground="White" 
+                <TextBlock Text="{Binding Group.Time, Mode=TwoWay}" FontSize="15" FontWeight="Black" Foreground="White" 
+                           Margin="0,3,0,3"
+                           HorizontalAlignment="Center"/>
+                <TextBlock Text="{Binding Group.Day, Mode=TwoWay}" FontSize="15" FontWeight="Black" Foreground="White" 
                            Margin="0,3,0,3"
                            HorizontalAlignment="Center"/>
                 <TextBlock Text="{Binding Group.GroupName, Mode=TwoWay}" FontSize="12" FontWeight="Bold" Foreground="White"
@@ -249,10 +252,9 @@
                            HorizontalAlignment="Center"/>
             </StackPanel>
         </Grid>
-        <ListView ItemsSource="{Binding Group.Participants}" 
+        <ListView ItemsSource="{Binding Participants}" 
                   Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"
-                  Margin="20,5,20,5"
-                  Name="ListView">
+                  Margin="20,5,20,5">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -274,7 +276,6 @@
                                     Background="{Binding VoucherValid, Mode=OneWay, Converter={StaticResource ColorConverter}}" >
                             <TextBlock Text="{Binding Name}"
                                        Margin="0,0,3,0"/>
-                            <TextBlock Text="{Binding LastName}"/>
                             <TextBlock Text="{Binding Present}"
                                        Margin="3,0,3,0"/>
                         </StackPanel>

@@ -105,8 +105,7 @@ namespace TeamProject.Models
             }
         }
 
-        //TODO: czyli w konkretnej grupie nie ma listy?
-        //public ObservableCollection<ParticipantModel> Participants 
+        //public ObservableCollection<ParticipantModel> Participants
         //{
         //    get { return _participants; }
         //    set
@@ -115,7 +114,7 @@ namespace TeamProject.Models
         //        {
         //            _participants = value;
         //            RaisePropertyChanged(nameof(Participants));
-        //        }        
+        //        }
         //    }
         //}
 

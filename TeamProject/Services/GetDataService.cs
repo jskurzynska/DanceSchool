@@ -66,7 +66,7 @@ namespace TeamProject.Services
             }
         }
 
-        public async Task<ObservableCollection<ParticipantModel>> GetPresenceList(string groupId)
+        public async Task<ObservableCollection<ParticipantModel>> GetPresenceList(int groupId)
         {
             try
             {

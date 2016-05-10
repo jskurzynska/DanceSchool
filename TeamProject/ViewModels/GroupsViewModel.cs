@@ -49,14 +49,23 @@ namespace TeamProject.ViewModels
             {
                 _selectedGroup = value;
                 RaisePropertyChanged();
-                ShowThis();
+                ShowSelectedGroupParticipants();
             }
         }
 
-        public void ShowThis()
+        public async void ShowSelectedGroupParticipants()
         {
-            Messenger.Default.Send(SelectedGroup);
+            var participantModels = await GetParticipantsList(SelectedGroup.Id);
+            Tuple<GroupModel, ObservableCollection<ParticipantModel>> data = 
+                new Tuple<GroupModel, ObservableCollection<ParticipantModel>>(SelectedGroup, participantModels);
+            Messenger.Default.Send(data);
             _navigationService.NavigateTo("PresencePage");
+        }
+
+        public async Task<ObservableCollection<ParticipantModel>> GetParticipantsList(int id)
+        {
+            GetDataService getDataService = new GetDataService();
+            return await getDataService.GetPresenceList(id);
         }
 
         public ICommand GoBackCommand
