@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SQLite.Net;
-using TeamProject.Services;
 
 namespace TeamProject.Repositories
 {
@@ -36,6 +32,11 @@ namespace TeamProject.Repositories
         public IEnumerable<T> GetAll()
         {
             return GetFirstItem() == null ? null : Context.Table<T>().ToList();
+        }
+
+        public void RemoveAll()
+        {
+            Context.Table<T>().Connection.DeleteAll<T>();
         }
     }
 }

@@ -10,21 +10,22 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using TeamProject.Models;
+using TeamProject.Services;
 
 namespace TeamProject.ViewModels
 {
     public class PresenceViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
+        private readonly PostDataService _postDataService = new PostDataService();
 
         public PresenceViewModel(INavigationService navigationService) 
         {
             _navigationService = navigationService;
-            //Messenger.Default.Register<ObservableCollection<ParticipantModel>>(this, participants => Participants = participants);
-           Messenger.Default.Register<Tuple<GroupModel, ObservableCollection<ParticipantModel>>>(this, data =>
+           Messenger.Default.Register<KeyValuePair<GroupModel, ObservableCollection<ParticipantModel>>>(this, data =>
            {
-               Group = data.Item1;
-               Participants = data.Item2;
+               Group = data.Key ;
+               Participants = data.Value;
            }); 
         }
 
@@ -61,6 +62,23 @@ namespace TeamProject.ViewModels
                     _navigationService.GoBack();
                 });
             }
+        }
+
+        public ICommand SendPresenceListCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                     SendPresenceList();
+                    _navigationService.GoBack();
+                });
+            }
+        }
+
+        public async void SendPresenceList()
+        {
+            await _postDataService.PostPresenceList(Participants, Group.Id);
         }
     }
 }

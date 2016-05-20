@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using TeamProject.Models;
-using TeamProject.Repositories;
 using TeamProject.Services;
 
 namespace TeamProject.ViewModels
@@ -25,8 +19,22 @@ namespace TeamProject.ViewModels
         public MainPageViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+        }
+
+        public void UserNameSet()
+        {
             UserName = _manageRepositoriesService.TrainerRepository.GetFirstItem();
-            CreateGroups();
+        }
+
+        public void NearestGroupsSet()
+        {
+            if(NearestGroups.Count > 0)
+                return;
+            var groups = _manageRepositoriesService.GroupRepository.GetAll().ToList();
+            for (int i = 0; i < 2 && i < groups.Count(); ++i)
+            {
+                NearestGroups.Add(groups[i]);    
+            }
         }
 
         public ObservableCollection<GroupModel> NearestGroups
@@ -39,6 +47,7 @@ namespace TeamProject.ViewModels
             }
         }
 
+        private TrainerModel _userName;
         public TrainerModel UserName
         {
             get { return _userName; }
@@ -52,44 +61,6 @@ namespace TeamProject.ViewModels
             }
         }
 
-        private TrainerModel _userName;
-
-        public void CreateGroups()
-        {
-
-            NearestGroups = new ObservableCollection<GroupModel>()
-            {
-                new GroupModel
-                {
-                    GroupName = "Salsa grupa początkująca ",
-                    Day = "Środa",
-                    Time = "16:45-17:15",
-                    Place = "ul. Piłsudzkiego 34/1"
-                },
-                new GroupModel
-                {
-                    GroupName = "Salsa grupa początkująca ",
-                    Day = "Środa",
-                    Time = "16:45-17:15",
-                    Place = "ul. Piłsudzkiego 34/1"
-                },
-                new GroupModel
-                {
-                    GroupName = "Salsa grupa początkująca ",
-                    Day = "Środa",
-                    Time = "16:45-17:15",
-                    Place = "ul. Piłsudzkiego 34/1"
-                },
-                new GroupModel
-                {
-                    GroupName = "Taniec towarzyski grupa początkująca ",
-                    Day = "Poniedziałek",
-                    Time = " 16:45-17:15",
-                    Place = "ul. Piłsudzkiego 34/1"
-                }
-
-            };
-        }
         public ICommand MyGroupsCommand
         {
             get
@@ -109,6 +80,7 @@ namespace TeamProject.ViewModels
                 return new RelayCommand(() =>
                 {
                     AppService.DeleteTokenFromAppSettings();
+                    _manageRepositoriesService.ClearRepositories();
                     _navigationService.NavigateTo("LoggingPage"); 
                 });
             }

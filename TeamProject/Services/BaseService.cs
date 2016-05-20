@@ -1,14 +1,8 @@
 ﻿using System;
-using System.IO;
-using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading;
 using Windows.Security.Cryptography.Certificates;
 using Windows.Web.Http.Filters;
 using WindowsRuntime.HttpClientFilters;
-using TeamProject.Models;
 
 namespace TeamProject.Services
 {

@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
-using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
-using TeamProject.Models;
-using TeamProject.Repositories;
 using TeamProject.Services;
-using TeamProject.Views;
+
 
 namespace TeamProject.ViewModels
 {
@@ -20,11 +14,12 @@ namespace TeamProject.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly LoginService _loginService = new LoginService();
-        private readonly ManageRepositoriesService _manageRepositoriesService = new ManageRepositoriesService();
+        private readonly ManageRepositoriesService _manageRepositoriesService;
        
         public LoggingViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+            _manageRepositoriesService = new ManageRepositoriesService();
         }
 
         public string Email { get; set; } 

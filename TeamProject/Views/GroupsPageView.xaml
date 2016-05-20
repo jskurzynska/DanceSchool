@@ -74,7 +74,7 @@
                        HorizontalAlignment="Center" VerticalAlignment="Top"  />
         </Grid>
         <ListView x:Name="List" ItemsSource="{Binding Groups, Mode=TwoWay}" SelectedItem="{Binding SelectedGroup, Mode=TwoWay}" 
-                  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="20,0,20,0"
+                  Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4" Margin="20,0,20,0" 
                   IsItemClickEnabled="True">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">

@@ -316,7 +316,8 @@
                 Content="Zatwierdź" 
                 FontWeight="Bold" Foreground="White"
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                Margin="20,8,20,8">
+                Margin="20,8,20,8"
+                Command ="{Binding SendPresenceListCommand}">
             <Button.Background>
                 <SolidColorBrush Opacity="0.5" Color="DarkSlateBlue"/>
             </Button.Background>

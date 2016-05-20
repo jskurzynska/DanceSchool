@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TeamProject.Models;
@@ -10,7 +8,6 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
-using TeamProject.Repositories;
 using TeamProject.Services;
 
 namespace TeamProject.ViewModels
@@ -23,10 +20,14 @@ namespace TeamProject.ViewModels
         public GroupsViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
+        }
+
+        public void GroupsSet()
+        {
             Groups = new ObservableCollection<GroupModel>(_manageRepositoriesService.GroupRepository.GetAll());
         }
 
-        private ObservableCollection<GroupModel> _groups;
+        private ObservableCollection<GroupModel> _groups = new ObservableCollection<GroupModel>();
         public ObservableCollection<GroupModel> Groups
         {
             get { return _groups; }
@@ -40,31 +41,30 @@ namespace TeamProject.ViewModels
         private GroupModel _selectedGroup;
         public GroupModel SelectedGroup
         {
-            get
-            {
-                return _selectedGroup;
-            }
-
+            get { return _selectedGroup; }
             set
             {
                 _selectedGroup = value;
                 RaisePropertyChanged();
-                ShowSelectedGroupParticipants();
+                if (value != null)
+                {
+                    ShowSelectedGroupParticipants();
+                }
             }
         }
 
         public async void ShowSelectedGroupParticipants()
         {
             var participantModels = await GetParticipantsList(SelectedGroup.Id);
-            Tuple<GroupModel, ObservableCollection<ParticipantModel>> data = 
-                new Tuple<GroupModel, ObservableCollection<ParticipantModel>>(SelectedGroup, participantModels);
+            KeyValuePair<GroupModel, ObservableCollection<ParticipantModel>> data = 
+                new KeyValuePair<GroupModel, ObservableCollection<ParticipantModel>>(SelectedGroup,participantModels);
             Messenger.Default.Send(data);
             _navigationService.NavigateTo("PresencePage");
         }
 
         public async Task<ObservableCollection<ParticipantModel>> GetParticipantsList(int id)
         {
-            GetDataService getDataService = new GetDataService();
+            var getDataService = new GetDataService();
             return await getDataService.GetPresenceList(id);
         }
 
@@ -78,7 +78,6 @@ namespace TeamProject.ViewModels
                 });
             }
         }
-
 
         public ICommand ShowThisGroupCommand
         {

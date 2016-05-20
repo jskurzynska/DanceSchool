@@ -28,7 +28,7 @@
         <TextBlock x:Name="school" Grid.Row="1" Grid.Column="1"  
                    Text ="Flashdance Wrocław" FontSize="12" Foreground="Navy" 
                    HorizontalAlignment="Center" VerticalAlignment="Top"/>
-        <Image Source="../Assets/zdjecie.jpg" 
+        <Image Source="ms-appdata:///local/userPhoto.png"
                Grid.RowSpan="2" Grid.ColumnSpan="1" Margin="8,8,8,8" />
     </Grid>
 </UserControl>

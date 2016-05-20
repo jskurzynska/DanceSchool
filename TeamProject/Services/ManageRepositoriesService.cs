@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Popups;
 using TeamProject.Models;
 using TeamProject.Repositories;
 
@@ -22,14 +18,22 @@ namespace TeamProject.Services
             _dbService.CreateDb();
         }
 
+        public void ClearRepositories()
+        {
+            TrainerRepository.RemoveAll();
+            GroupRepository.RemoveAll();
+        }
+
         public async Task GetUserData()
         {
+            TrainerRepository.RemoveAll();
             TrainerModel trainer = await _getDataService.GetTrainerInfo();
             TrainerRepository.Add(trainer);
         }
 
         public async Task GetGroups()
         {
+            GroupRepository.RemoveAll();
             ObservableCollection<GroupModel> groups = await _getDataService.GetGroupsInfo();
             foreach (var groupModel in groups)
             {
@@ -39,12 +43,7 @@ namespace TeamProject.Services
 
         public bool CheckIfTrainerDataExists()
         {
-            if (TrainerRepository.GetFirstItem() != null)
-            {
-                return true;
-            }
-            return false;
+            return TrainerRepository.GetFirstItem() != null;
         }
-
     }
 }
