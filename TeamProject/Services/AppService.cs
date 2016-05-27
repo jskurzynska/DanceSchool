@@ -13,7 +13,6 @@ namespace TeamProject.Services
 
         public static async void SaveImageInAppSettings(string nameFile, byte[] buffer)
         {
-            //TODO: WYWALA SIEEE 
             StorageFile sampleFile =
                 await LocalFolder.CreateFileAsync(nameFile, CreationCollisionOption.ReplaceExisting);
            await FileIO.WriteBytesAsync(sampleFile, buffer);

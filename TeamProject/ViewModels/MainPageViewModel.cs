@@ -77,7 +77,7 @@ namespace TeamProject.ViewModels
         {
             get
             {
-                return new RelayCommand(() =>
+                return new RelayCommand( () =>
                 {
                     AppService.DeleteTokenFromAppSettings();
                     _manageRepositoriesService.ClearRepositories();

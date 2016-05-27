@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Media.Imaging;
+
 
 // The UserName Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -22,6 +15,22 @@ namespace TeamProject.Controls
         public UserUC()
         {
             this.InitializeComponent();
+        }
+
+        
+        private async Task LoadImage()
+        {
+            string fileName = "userPhoto.png";
+            StorageFolder myfolder = ApplicationData.Current.LocalFolder;
+            StorageFile file = await myfolder.GetFileAsync(fileName);
+            await Windows.Storage.FileIO.ReadBufferAsync(file);
+            BitmapImage img = new BitmapImage(new Uri(file.Path));
+            Image.Source = img;
+        }
+
+        private async void Image_OnLoading(FrameworkElement sender, object args)
+        {
+            await LoadImage();
         }
     }
 }
