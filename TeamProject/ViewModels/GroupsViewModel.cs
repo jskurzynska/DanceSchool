@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Dynamic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using TeamProject.Models;
@@ -55,17 +56,26 @@ namespace TeamProject.ViewModels
 
         public async void ShowSelectedGroupParticipants()
         {
-            var participantModels = await GetParticipantsList(SelectedGroup.Id);
-            KeyValuePair<GroupModel, ObservableCollection<ParticipantModel>> data = 
-                new KeyValuePair<GroupModel, ObservableCollection<ParticipantModel>>(SelectedGroup,participantModels);
+            var data = await GetParticipantsList(SelectedGroup.Id);
             Messenger.Default.Send(data);
+            var vouchers = await GetVoucherTemplates(SelectedGroup.Id);
+            Messenger.Default.Send(vouchers);
             _navigationService.NavigateTo("PresencePage");
         }
 
-        public async Task<ObservableCollection<ParticipantModel>> GetParticipantsList(int id)
+        public async Task<KeyValuePair<GroupModel, ObservableCollection<ParticipantModel>>> GetParticipantsList(int id)
         {
             var getDataService = new GetDataService();
-            return await getDataService.GetPresenceList(id);
+            var participantModels = await getDataService.GetPresenceList(id);
+            KeyValuePair<GroupModel, ObservableCollection<ParticipantModel>> data =
+              new KeyValuePair<GroupModel, ObservableCollection<ParticipantModel>>(SelectedGroup, participantModels);
+            return data;
+        }
+
+        public async Task<ObservableCollection<VoucherTemplateModel>> GetVoucherTemplates(int id)
+        {
+            var getDataService = new GetDataService();
+            return await getDataService.GetVoucherTemplates(id);
         }
 
         public ICommand GoBackCommand

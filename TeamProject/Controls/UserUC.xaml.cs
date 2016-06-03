@@ -17,7 +17,6 @@ namespace TeamProject.Controls
             this.InitializeComponent();
         }
 
-        
         private async Task LoadImage()
         {
             string fileName = "userPhoto.png";

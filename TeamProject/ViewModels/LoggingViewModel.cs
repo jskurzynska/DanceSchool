@@ -34,6 +34,7 @@ namespace TeamProject.ViewModels
         {
             try
             {
+
                 await _loginService.Login(Email, Password);
                 MessageDialog dialog = new MessageDialog("You are now logged in as " + Email, "Success");
                 await dialog.ShowAsync();

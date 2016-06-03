@@ -1,0 +1,35 @@
+﻿<UserControl
+    x:Class="TeamProject.Controls.FlyoutPaymentControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TeamProject.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:helpers="using:TeamProject.Helpers"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    DataContext="{Binding PresencePage, Source={StaticResource ViewModelLocator}}">
+    <Grid>
+        <Button Content="$" Foreground="DarkTurquoise"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                Margin="0,0,10,0">
+            <Button.Background>
+                <SolidColorBrush Color="Black" Opacity="0.7"/>
+            </Button.Background>
+            <Button.Flyout>
+                <Flyout>
+                    <local:VoucherTemplatesControl/>
+                    <interactivity:Interaction.Behaviors>
+                        <core:DataTriggerBehavior Binding="{Binding IsFlyoutClosed}"
+                                                      ComparisonCondition="Equal" Value="True">
+                            <helpers:CloseFlyoutHelper/>
+                        </core:DataTriggerBehavior>
+                    </interactivity:Interaction.Behaviors>
+                </Flyout>
+            </Button.Flyout>
+        </Button>
+    </Grid>
+</UserControl>

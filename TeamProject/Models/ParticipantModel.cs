@@ -30,7 +30,6 @@ namespace TeamProject.Models
             }
         }
 
-        //TODO: To jest dobrze?
         private bool _present;
         [JsonProperty("present")]
         public bool? Present

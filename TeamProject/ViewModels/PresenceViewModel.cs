@@ -18,6 +18,11 @@ namespace TeamProject.ViewModels
     {
         private readonly INavigationService _navigationService;
         private readonly PostDataService _postDataService = new PostDataService();
+        private bool _isFlyoutClosed;
+        private GroupModel _group;
+        private ObservableCollection<VoucherTemplateModel> _voucherTemplate;
+        private PaymentModel _paymentModel = new PaymentModel() { VoucherType = VoucherType.AMOUNT };
+        private ObservableCollection<ParticipantModel> _participants = new ObservableCollection<ParticipantModel>();
 
         public PresenceViewModel(INavigationService navigationService) 
         {
@@ -26,10 +31,21 @@ namespace TeamProject.ViewModels
            {
                Group = data.Key ;
                Participants = data.Value;
-           }); 
+           });
+            Messenger.Default.Register<ObservableCollection<VoucherTemplateModel>>(this, vouchers => VoucherTemplate = vouchers);
         }
 
-        private GroupModel _group;
+       
+        public bool IsFlyoutClosed
+        {
+            get { return _isFlyoutClosed; }
+            set
+            {
+                Set(() => IsFlyoutClosed, ref _isFlyoutClosed, value);
+                if (value)
+                    IsFlyoutClosed = false;
+            }
+        }
 
         public GroupModel Group
         {
@@ -41,8 +57,26 @@ namespace TeamProject.ViewModels
             }
         }
 
+        public ObservableCollection<VoucherTemplateModel> VoucherTemplate
+        {
+            get { return _voucherTemplate; }
+            set
+            {
+                _voucherTemplate = value;   
+                RaisePropertyChanged();
+            }
+        }
 
-        private ObservableCollection<ParticipantModel> _participants = new ObservableCollection<ParticipantModel>();
+        public PaymentModel PaymentModel
+        {
+            get { return _paymentModel; }
+            set
+            {
+                _paymentModel = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public ObservableCollection<ParticipantModel> Participants
         {
             get { return _participants; }
@@ -53,15 +87,11 @@ namespace TeamProject.ViewModels
             }
         }
 
-        public ICommand GoBackCommand
+        public ICommand GoBackCommand =>  new RelayCommand(_navigationService.GoBack);
+
+        public async void SendPresenceList()
         {
-            get
-            {
-                return new RelayCommand(() =>
-                {
-                    _navigationService.GoBack();
-                });
-            }
+            await _postDataService.PostPresenceList(Participants, Group.Id);
         }
 
         public ICommand SendPresenceListCommand
@@ -70,15 +100,46 @@ namespace TeamProject.ViewModels
             {
                 return new RelayCommand(() =>
                 {
-                     SendPresenceList();
+                    SendPresenceList();
                     _navigationService.GoBack();
                 });
             }
         }
 
-        public async void SendPresenceList()
+        public async void SendPayment()
         {
-            await _postDataService.PostPresenceList(Participants, Group.Id);
+            await _postDataService.PostPayment(PaymentModel);
+        }
+
+        public ICommand SendPaymentCommand  
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    SendPayment();
+                    CloseFlyout();
+                });
+            }
+        }
+
+        public void CloseFlyout()
+        {
+            IsFlyoutClosed = true;
+        }
+
+        public ICommand CancelPaymentCommand => new RelayCommand(CloseFlyout);
+
+        private VoucherTemplateModel _chosenVoucher = new VoucherTemplateModel();
+
+        public VoucherTemplateModel ChosenVoucher
+        {
+            get { return _chosenVoucher; }
+            set
+            {
+                _chosenVoucher = value;
+                RaisePropertyChanged();
+            }
         }
     }
 }

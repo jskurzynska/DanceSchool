@@ -112,5 +112,29 @@ namespace TeamProject.Services
                 throw new SecurityException(ex.Message);
             }
         }
+
+       public async Task<ObservableCollection<VoucherTemplateModel>> GetVoucherTemplates(int groupId)
+        {
+            try
+            {
+                var client = GetClient();
+                client.DefaultRequestHeaders.Add("token", (string)AppService.LocalSettings.Values["loginToken"]);
+
+                var httpResponse = await client.GetAsync($"/api/voucherTemplates/{groupId}");
+
+                if (httpResponse.IsSuccessStatusCode)
+                {
+                    string result = await httpResponse.Content.ReadAsStringAsync();
+                    var vouchers = JsonConvert.DeserializeObject<ObservableCollection<VoucherTemplateModel>>(result);
+                    return vouchers;
+                }
+                string content = await httpResponse.Content.ReadAsStringAsync();
+                throw new InvalidOperationException(content);
+            }
+            catch (Exception ex)
+            {
+                throw new SecurityException(ex.Message);
+            }
+        }
     }
 }

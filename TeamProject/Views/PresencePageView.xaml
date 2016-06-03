@@ -276,38 +276,13 @@
                                     Background="{Binding VoucherValid, Mode=OneWay, Converter={StaticResource ColorConverter}}" >
                             <TextBlock Text="{Binding Name}"
                                        Margin="0,0,3,0"/>
-                            <TextBlock Text="{Binding Present}"
-                                       Margin="3,0,3,0"/>
                         </StackPanel>
                         <CheckBox IsChecked="{Binding Present, Mode=TwoWay}"
                                       Grid.Column="2"
                                       HorizontalAlignment="Stretch"
                                       Margin="5,0,0,0"
                                   Style="{StaticResource CheckBoxStyle1}"/>
-                        <Button Name="payment" Grid.Column="0" 
-                                Content="$" Foreground="DarkTurquoise"
-                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                Margin="0,0,10,0">
-                            <Button.Background>
-                                <SolidColorBrush Color="Black" Opacity="0.7"/>
-                            </Button.Background>
-                            <Button.Flyout>
-                                <Flyout>
-                                    <StackPanel>
-                                        <RadioButton Content="Na miesiąc" IsChecked="{Binding Payment.MonthTicket, Mode=TwoWay}"/>
-                                        <TextBlock Text="{Binding Payment.MonthTicket}"/>
-                                        <RadioButton Content="Jeden dzień" IsChecked="{Binding Payment.OneDayTicket, Mode=TwoWay}"/>
-                                        <TextBlock Text="{Binding Payment.OneDayTicket}"/>
-                                        <RadioButton Content="Na sezon" IsChecked="{Binding Payment.SeasonTicket, Mode=TwoWay}"/>
-                                        <TextBlock Text="{Binding Payment.SeasonTicket}"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Button Content="Zatwierdź" Margin="5"/>
-                                            <Button Content="Anuluj" Margin="5"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Flyout>
-                            </Button.Flyout>
-                        </Button>
+                        <controls:FlyoutPaymentControl Grid.Column="0" />
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

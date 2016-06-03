@@ -3,58 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace TeamProject.Models
 {
     public class PaymentModel: BaseModel
     {
-        private bool _oneDayTicket;
-        private bool _monthTicket;
-        private bool _seasonTicket;
+        private int _trainerId;
 
-        public PaymentModel()
+        [JsonProperty("trainerId")]
+        public int TrainerId
         {
-            OneDayTicket = false;
-            MonthTicket = false;
-            SeasonTicket = false;
-        }
-
-        public bool MonthTicket
-        {
-            get { return _monthTicket; }
+            get { return _trainerId; }
             set
             {
-                if ( _monthTicket != value)
-                {
-                    _monthTicket = value;
-                    RaisePropertyChanged("MonthTicket");
-                }
+                _trainerId = value;
+                RaisePropertyChanged(nameof(TrainerId));
             }
         }
 
-        public bool SeasonTicket
+        private int _participantId;
+
+        [JsonProperty("participantId")]
+        public int ParticipantId
         {
-            get { return _seasonTicket; }
+            get { return _participantId; }
             set
             {
-                if (_seasonTicket != value)
-                {
-                    _seasonTicket = value;
-                    RaisePropertyChanged("SeasonTicket");
-                }
+                _participantId = value;
+                RaisePropertyChanged(nameof(ParticipantId));
             }
         }
 
-        public bool OneDayTicket
+        private int _voucherTemplateId;
+        [JsonProperty("voucherTemplateId")]
+        public int VoucherTemplateId
         {
-            get { return _oneDayTicket; }
+            get { return _voucherTemplateId; }
             set
             {
-                if (_oneDayTicket != value)
-                {
-                    _oneDayTicket = value;
-                    RaisePropertyChanged("OneDayTicket");
-                }
+                _voucherTemplateId = value; 
+                RaisePropertyChanged(nameof(VoucherTemplateId));
+            }
+        }
+
+        private VoucherType _voucherType;
+        [JsonProperty("voucherType")]
+        public VoucherType VoucherType
+        {
+            get { return _voucherType; }
+            set
+            {
+                _voucherType = value;
+                RaisePropertyChanged(nameof(VoucherType));
             }
         }
     }
