@@ -141,5 +141,18 @@ namespace TeamProject.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        private ParticipantModel _participant = new ParticipantModel();
+
+        public ParticipantModel Participant
+        {
+            get { return _participant; }
+            set
+            {
+                _participant = value; 
+                RaisePropertyChanged();
+            }
+        }
+
     }
 }

@@ -44,18 +44,18 @@ namespace TeamProject.Models
             }
         }
 
-        private bool _isChecked;
-        [JsonIgnore]
-        public bool IsChecked
-        {
-            get { return _isChecked; }
-            set
-            {
-                if( _isChecked == value) return;
-                _isChecked = value;
-                RaisePropertyChanged(nameof(IsChecked));
-            }
-        }
+        //private bool _isChecked;
+        //[JsonIgnore]
+        //public bool IsChecked
+        //{
+        //    get { return _isChecked; }
+        //    set
+        //    {
+        //        if( _isChecked == value) return;
+        //        _isChecked = value;
+        //        RaisePropertyChanged(nameof(IsChecked));
+        //    }
+        //}
 
 
         public override string ToString()

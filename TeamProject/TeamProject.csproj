@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="Converters\BooleanToColorConverter.cs" />
     <Compile Include="Helpers\CloseFlyoutHelper.cs" />
+    <Compile Include="Helpers\SelectListViewItemWhenElementGotFocusBehaviorHelper.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\GroupModel.cs" />
     <Compile Include="Models\ParticipantModel.cs" />

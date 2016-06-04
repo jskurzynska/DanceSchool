@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,21 +61,17 @@ namespace TeamProject.Models
             }
         }
 
-        //private PaymentModel _payment = new PaymentModel();
-
-        //public PaymentModel Payment
+        //private ObservableCollection<VoucherTemplateModel> _voucherTemplate;
+        //[JsonIgnore]
+        //public ObservableCollection<VoucherTemplateModel> VoucherTemplate
         //{
-        //    get { return _payment; }
+        //    get { return _voucherTemplate; }
         //    set
         //    {
-        //        if (_payment != value)
-        //        {
-        //            _payment = value;
-        //            RaisePropertyChanged("Payment");
-        //        }
+        //        _voucherTemplate = value;
+        //        RaisePropertyChanged(nameof(VoucherTemplate));
         //    }
         //}
-
 
     }
 }
