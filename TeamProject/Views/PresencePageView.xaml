@@ -13,9 +13,6 @@
     mc:Ignorable="d"
     DataContext="{Binding Path=PresencePage, Source={StaticResource ViewModelLocator}}">
     <Page.Resources>
-        <!--<DataTemplate x:Key="DirectionItem">
-        </DataTemplate>-->
-
         <Style x:Key="CheckBoxStyle1" TargetType="CheckBox">
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="Foreground" Value="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
@@ -311,7 +308,6 @@
                                 </Flyout>
                             </Button.Flyout>
                         </Button>
-                        <!--<controls:FlyoutPaymentControl Grid.Column="0" />-->
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>

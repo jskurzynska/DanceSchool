@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace TeamProject.Models
 {
@@ -44,23 +45,54 @@ namespace TeamProject.Models
             }
         }
 
-        //private bool _isChecked;
-        //[JsonIgnore]
-        //public bool IsChecked
-        //{
-        //    get { return _isChecked; }
-        //    set
-        //    {
-        //        if( _isChecked == value) return;
-        //        _isChecked = value;
-        //        RaisePropertyChanged(nameof(IsChecked));
-        //    }
-        //}
-
-
         public override string ToString()
         {
-            return $"{Value} wejść - {Price} zl";
+            return $"{DecodeVoucherValue()} - {Price} zl";
+        }
+
+        private string DecodeVoucherValue()
+        {
+            return Value.Contains("P")  ? DecodeTimeType() : DecodeAmountType();
+        }
+
+
+        private string DecodeAmountType()
+        {
+            return $"{Value} wejść ";
+        }
+
+        private readonly Dictionary<string,string> _dictionary;
+        
+        public VoucherTemplateModel()
+        {
+            _dictionary = new Dictionary<string, string>()
+            {
+                {"P", " "},
+                {"Y", " lat "},
+                {" 1 lat", " 1 rok "},
+                {" 2 lat", " 2 lata "},
+                {" 3 lat", " 3 lata "},
+                {" 4 lat", " 4 lata "},
+                {"M", " miesięcy "},
+                {" 1 miesięcy", " 1 miesiąc "},
+                {" 2 miesięcy", " 2 miesiące "},
+                {" 3 miesięcy", " 3 miesiące "},
+                {" 4 miesięcy", " 4 miesiące "},
+                {"D", " dni "},
+                {" 1 dni", " 1 dzień "}
+            };
+        }
+
+        private string DecodeTimeType()
+        {
+            var result = Value;
+
+            foreach (var keyValue in _dictionary)
+            {
+                result = result.Replace(keyValue.Key, keyValue.Value);
+            }
+
+            return result;
         }
     }
 }
