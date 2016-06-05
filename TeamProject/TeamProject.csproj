@@ -98,9 +98,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\FlyoutPaymentControl.xaml.cs">
-      <DependentUpon>FlyoutPaymentControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\UserUC.xaml.cs">
       <DependentUpon>UserUC.xaml</DependentUpon>
     </Compile>
@@ -174,10 +171,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Controls\FlyoutPaymentControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\UserUC.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

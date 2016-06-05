@@ -47,14 +47,25 @@ namespace TeamProject.Models
 
         public override string ToString()
         {
-            return $"{DecodeVoucherValue()} - {Price} zl";
+            return $"{DecodeVoucherValue()} - {ManipulatePrice()} zl";
         }
 
-        private string DecodeVoucherValue()
+        public string DecodeVoucherValue()
         {
-            return Value.Contains("P")  ? DecodeTimeType() : DecodeAmountType();
+            return Value.Contains("P")  ? DecodeTimeValue() : DecodeAmountType();
         }
 
+
+        public string ManipulatePrice()
+        {
+            var result = Price.ToString().Replace(".", ",");
+            var strings = result.Split(',');
+            if (strings[1].Length < 2)
+            {
+                result += "0";
+            }
+            return result;
+        }
 
         private string DecodeAmountType()
         {
@@ -83,7 +94,7 @@ namespace TeamProject.Models
             };
         }
 
-        private string DecodeTimeType()
+        public string DecodeTimeValue()
         {
             var result = Value;
 

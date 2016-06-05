@@ -287,9 +287,9 @@
                                       Margin="5,0,0,0"
                                   Style="{StaticResource CheckBoxStyle1}"/>
                         <Button x:Name="ButtonPayment" Grid.Column="0"
-                        Content="$" Foreground="DarkTurquoise"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                    Margin="0,0,10,0">  
+                                Content="$" Foreground="DarkTurquoise"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                                Margin="0,0,10,0">  
                             <interactivity:Interaction.Behaviors>
                                 <helpers:SelectListViewItemWhenElementGotFocusBehaviorHelper ListView="{Binding ElementName=ParticipantsListView}" />
                             </interactivity:Interaction.Behaviors>

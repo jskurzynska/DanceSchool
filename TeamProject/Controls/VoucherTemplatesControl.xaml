@@ -10,10 +10,16 @@
     DataContext="{Binding Path=PresencePage, Source={StaticResource ViewModelLocator}}">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView Grid.Row="0"
+        <TextBlock Grid.Row="0"
+                   Text="{Binding Participant.Name}"
+                   Margin="0,2,0,2"
+                   FontWeight="Black"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <ListView Grid.Row="1"
                   ItemsSource="{Binding VoucherTemplate}"
                   SelectedItem="{Binding ChosenVoucher, Mode=TwoWay}"
                   IsItemClickEnabled="True"
@@ -30,7 +36,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <StackPanel Grid.Row="1"
+        <StackPanel Grid.Row="2"
                     Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Content="Zatwierdź" Margin="6"

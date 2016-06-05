@@ -61,17 +61,5 @@ namespace TeamProject.Models
             }
         }
 
-        //private ObservableCollection<VoucherTemplateModel> _voucherTemplate;
-        //[JsonIgnore]
-        //public ObservableCollection<VoucherTemplateModel> VoucherTemplate
-        //{
-        //    get { return _voucherTemplate; }
-        //    set
-        //    {
-        //        _voucherTemplate = value;
-        //        RaisePropertyChanged(nameof(VoucherTemplate));
-        //    }
-        //}
-
     }
 }

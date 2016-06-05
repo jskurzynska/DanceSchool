@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -21,7 +22,7 @@ namespace TeamProject.ViewModels
         private bool _isFlyoutClosed;
         private GroupModel _group;
         private ObservableCollection<VoucherTemplateModel> _voucherTemplate;
-        private PaymentModel _paymentModel = new PaymentModel() { VoucherType = VoucherType.amount };
+        private PaymentModel _paymentModel = new PaymentModel() { VoucherType = VoucherType.cokolwiek, TrainerId = 1};
         private ObservableCollection<ParticipantModel> _participants = new ObservableCollection<ParticipantModel>();
 
         public PresenceViewModel(INavigationService navigationService) 
@@ -91,7 +92,15 @@ namespace TeamProject.ViewModels
 
         public async void SendPresenceList()
         {
-            await _postDataService.PostPresenceList(Participants, Group.Id);
+            try
+            {
+                await _postDataService.PostPresenceList(Participants, Group.Id);
+            }
+            catch (Exception)
+            {
+                var dialog = new MessageDialog("Lista obecności nie została wysłana! \n Spróbuj ponownie!");
+                await dialog.ShowAsync();
+            }
         }
 
         public ICommand SendPresenceListCommand
@@ -108,7 +117,19 @@ namespace TeamProject.ViewModels
 
         public async void SendPayment()
         {
-            await _postDataService.PostPayment(PaymentModel);
+            PaymentModel.ParticipantId = Participant.Id;
+            PaymentModel.VoucherTemplateId = ChosenVoucher.Id;
+            try
+            {
+                await _postDataService.PostPayment(PaymentModel);
+                var dialog = new MessageDialog("Płatność się powiodła!");
+                await dialog.ShowAsync();
+            }
+            catch (Exception ex)
+            {
+                var dialog = new MessageDialog("Płatność się nie powiodła! \n Spróbuj ponownie!");
+                await dialog.ShowAsync();
+            }
         }
 
         public ICommand SendPaymentCommand  

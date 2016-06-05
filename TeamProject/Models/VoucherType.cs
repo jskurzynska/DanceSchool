@@ -3,6 +3,7 @@
     public enum VoucherType
     {
         amount,
-        time
+        time,
+        cokolwiek
     }
 }

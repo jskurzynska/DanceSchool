@@ -10,23 +10,9 @@ namespace TeamProject.Models
 {
     public class PaymentModel: BaseModel
     {
-        private int _trainerId;
-
-        [JsonProperty("trainerId")]
-        public int TrainerId
-        {
-            get { return _trainerId; }
-            set
-            {
-                _trainerId = value;
-                RaisePropertyChanged(nameof(TrainerId));
-            }
-        }
-
-        private int _participantId;
-
+        private long _participantId;
         [JsonProperty("participantId")]
-        public int ParticipantId
+        public long ParticipantId
         {
             get { return _participantId; }
             set
@@ -36,9 +22,9 @@ namespace TeamProject.Models
             }
         }
 
-        private int _voucherTemplateId;
+        private long _voucherTemplateId;
         [JsonProperty("voucherTemplateId")]
-        public int VoucherTemplateId
+        public long VoucherTemplateId
         {
             get { return _voucherTemplateId; }
             set
@@ -48,16 +34,23 @@ namespace TeamProject.Models
             }
         }
 
-        private VoucherType _voucherType;
+        [JsonProperty("trainerId")]
+        public int TrainerId
+        {
+            get { return _trainerId; }
+            set { _trainerId = value; }
+        }
         [JsonProperty("voucherType")]
         public VoucherType VoucherType
         {
             get { return _voucherType; }
-            set
-            {
-                _voucherType = value;
-                RaisePropertyChanged(nameof(VoucherType));
-            }
+            set { _voucherType = value; }
         }
+
+        private int _trainerId;
+
+        private VoucherType _voucherType;
+
+
     }
 }
