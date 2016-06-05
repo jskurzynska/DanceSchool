@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using TeamProject.Models;
 
 namespace TestProject
@@ -12,7 +12,7 @@ namespace TestProject
         [TestMethod]
         public void DecodeTimeValueTest()
         {
-            _voucherTemplate = new VoucherTemplateModel()
+           var _voucherTemplate = new VoucherTemplateModel()
             {
                 Id = 1,
                 Price = 12.1,
@@ -20,7 +20,22 @@ namespace TestProject
             };
             var expectedValue = "1 rok 2 miesiące";
             var actual = _voucherTemplate.DecodeTimeValue();
-            Assert.AreEqual(expectedValue,actual);
+            Assert.AreEqual(expectedValue, actual);
+        }
+
+        [TestMethod]
+        public void ManipulatePriceTest()
+        {
+            _voucherTemplate = new VoucherTemplateModel()
+            {
+                Id = 1,
+                Price = 12.1,
+                Value = "P1Y2M"
+            };
+            var expectedPrice = "12,10";
+            var actual = _voucherTemplate.ManipulatePrice();
+            Assert.AreEqual(expectedPrice,actual);
+
         }
     }
 }
