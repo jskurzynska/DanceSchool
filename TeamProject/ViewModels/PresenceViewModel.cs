@@ -22,7 +22,7 @@ namespace TeamProject.ViewModels
         private bool _isFlyoutClosed;
         private GroupModel _group;
         private ObservableCollection<VoucherTemplateModel> _voucherTemplate;
-        private PaymentModel _paymentModel = new PaymentModel() { VoucherType = VoucherType.cokolwiek, TrainerId = 1};
+        private PaymentModel _paymentModel = new PaymentModel();
         private ObservableCollection<ParticipantModel> _participants = new ObservableCollection<ParticipantModel>();
 
         public PresenceViewModel(INavigationService navigationService) 

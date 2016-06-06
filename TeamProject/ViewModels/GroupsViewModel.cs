@@ -25,6 +25,7 @@ namespace TeamProject.ViewModels
 
         public void GroupsSet()
         {
+            ///TODO: tutaj tez zabezpieczyc zeby sie nie wywalilo
             Groups = new ObservableCollection<GroupModel>(_manageRepositoriesService.GroupRepository.GetAll());
         }
 

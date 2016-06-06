@@ -31,10 +31,17 @@ namespace TeamProject.ViewModels
         {
             if(NearestGroups.Count > 0)
                 return;
-            var groups = _manageRepositoriesService.GroupRepository.GetAll().ToList();
-            for (int i = 0; i < 2 && i < groups.Count(); ++i)
+            try
             {
-                NearestGroups.Add(groups[i]);    
+                var groups = _manageRepositoriesService.GroupRepository.GetAll().ToList();
+                for (int i = 0; i < 2 && i < groups.Count(); ++i)
+                {
+                    NearestGroups.Add(groups[i]);
+                }
+            }
+            catch (ArgumentNullException ex)
+            {
+               
             }
         }
 

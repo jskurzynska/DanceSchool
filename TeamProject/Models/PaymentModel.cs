@@ -8,9 +8,10 @@ using Newtonsoft.Json;
 
 namespace TeamProject.Models
 {
-    public class PaymentModel: BaseModel
+    public class PaymentModel : BaseModel
     {
         private long _participantId;
+
         [JsonProperty("participantId")]
         public long ParticipantId
         {
@@ -23,34 +24,17 @@ namespace TeamProject.Models
         }
 
         private long _voucherTemplateId;
+
         [JsonProperty("voucherTemplateId")]
         public long VoucherTemplateId
         {
             get { return _voucherTemplateId; }
             set
             {
-                _voucherTemplateId = value; 
+                _voucherTemplateId = value;
                 RaisePropertyChanged(nameof(VoucherTemplateId));
             }
         }
-
-        [JsonProperty("trainerId")]
-        public int TrainerId
-        {
-            get { return _trainerId; }
-            set { _trainerId = value; }
-        }
-        [JsonProperty("voucherType")]
-        public VoucherType VoucherType
-        {
-            get { return _voucherType; }
-            set { _voucherType = value; }
-        }
-
-        private int _trainerId;
-
-        private VoucherType _voucherType;
-
 
     }
 }

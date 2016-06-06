@@ -36,15 +36,13 @@ namespace TeamProject.ViewModels
             {
 
                 await _loginService.Login(Email, Password);
-                MessageDialog dialog = new MessageDialog("You are now logged in as " + Email, "Success");
-                await dialog.ShowAsync();
                 await _manageRepositoriesService.GetUserData();
                 await _manageRepositoriesService.GetGroups();
                 _navigationService.NavigateTo("MainPage");
             }
             catch (Exception ex)
             {
-                MessageDialog dialog = new MessageDialog(ex.Message, "Error");
+                MessageDialog dialog = new MessageDialog("Logowanie się nie powiodło! \n Spróbuj ponownie!");
                 await dialog.ShowAsync();
             }
         }
