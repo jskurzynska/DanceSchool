@@ -25,7 +25,10 @@ namespace TeamProject.Services
                 {
                     string result = await httpResponse.Content.ReadAsStringAsync();
                     var trainer = JsonConvert.DeserializeObject<TrainerModel>(result);
-                    await GetUserPhoto(trainer.PhotoUrl);
+                    if (trainer.PhotoUrl != null)
+                    {
+                        await GetUserPhoto(trainer.PhotoUrl);
+                    }
                     return trainer;
                 }
                 string content = await httpResponse.Content.ReadAsStringAsync();

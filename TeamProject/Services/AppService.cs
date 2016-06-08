@@ -11,12 +11,14 @@ namespace TeamProject.Services
         public static StorageFolder LocalFolder =
             ApplicationData.Current.LocalFolder;
 
+        public static bool IsPicture = false;
+
         public static async void SaveImageInAppSettings(string nameFile, byte[] buffer)
         {
+            IsPicture = true;
             StorageFile sampleFile =
                 await LocalFolder.CreateFileAsync(nameFile, CreationCollisionOption.ReplaceExisting);
-           await FileIO.WriteBytesAsync(sampleFile, buffer);
-  
+           await FileIO.WriteBytesAsync(sampleFile, buffer);  
         }
 
         public static void SaveTokenInAppSettings(string token)

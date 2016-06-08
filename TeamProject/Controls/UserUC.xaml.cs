@@ -4,6 +4,7 @@ using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
+using TeamProject.Services;
 
 
 // The UserName Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
@@ -29,7 +30,10 @@ namespace TeamProject.Controls
 
         private async void Image_OnLoading(FrameworkElement sender, object args)
         {
-            await LoadImage();
+            if (AppService.IsPicture)
+            {
+                await LoadImage();
+            }
         }
     }
 }
