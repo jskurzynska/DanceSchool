@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using SQLite.Net;
 
-namespace TeamProject.Repositories
+namespace TestingClasses.Repositories
 {
     public class Repository<T> : IRepository<T> where T: class
     {

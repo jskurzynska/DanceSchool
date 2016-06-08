@@ -1,4 +1,4 @@
-﻿namespace TeamProject.Models
+﻿namespace TestingClasses.Models
 {
     public enum VoucherType
     {

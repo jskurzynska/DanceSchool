@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace TeamProject.Models
+namespace TestingClasses.Models
 {
     public class VoucherTemplateModel: BaseModel
     {
@@ -80,17 +80,17 @@ namespace TeamProject.Models
             {
                 {"P", " "},
                 {"Y", " lat "},
-                {" 1 lat", " 1 rok "},
-                {" 2 lat", " 2 lata "},
-                {" 3 lat", " 3 lata "},
-                {" 4 lat", " 4 lata "},
-                {"M", " miesięcy "},
-                {" 1 miesięcy", " 1 miesiąc "},
-                {" 2 miesięcy", " 2 miesiące "},
-                {" 3 miesięcy", " 3 miesiące "},
-                {" 4 miesięcy", " 4 miesiące "},
-                {"D", " dni "},
-                {" 1 dni", " 1 dzień "}
+                {" 1 lat", " 1 rok"},
+                {" 2 lat", " 2 lata"},
+                {" 3 lat", " 3 lata"},
+                {" 4 lat", " 4 lata"},
+                {"M", " miesięcy"},
+                {" 1 miesięcy", " 1 miesiąc"},
+                {" 2 miesięcy", " 2 miesiące"},
+                {" 3 miesięcy", " 3 miesiące"},
+                {" 4 miesięcy", " 4 miesiące"},
+                {"D", " dni"},
+                {" 1 dni", " 1 dzień"}
             };
         }
 

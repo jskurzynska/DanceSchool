@@ -4,20 +4,23 @@ using System.IO;
 using System.Net.Http;
 using System.Security;
 using System.Threading.Tasks;
-using Windows.Storage;
 using Newtonsoft.Json;
-using TeamProject.Models;
+using TestingClasses.Models;
 
-namespace TeamProject.Services
+namespace TestingClasses.Services
 {
     public class GetDataService : BaseService
     {
-        public async Task<TrainerModel> GetTrainerInfo()
+        public async Task<TrainerModel> GetTrainerInfo(HttpClient httpClient= null)
         {
             try
             {
                 var client = GetClient();
                 client.DefaultRequestHeaders.Add("token", (string)AppService.LocalSettings.Values["loginToken"]);
+                if (httpClient != null)
+                {
+                    client = httpClient;
+                }
 
                 var httpResponse = await client.GetAsync("/api/userData");
 

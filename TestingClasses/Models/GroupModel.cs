@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.ApplicationModel.Contacts;
-using Windows.Graphics.Printing.OptionDetails;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace TeamProject.Models
+namespace TestingClasses.Models
 {
     public class GroupModel : BaseModel
     {
@@ -104,20 +96,5 @@ namespace TeamProject.Models
                 }
             }
         }
-
-        //public ObservableCollection<ParticipantModel> Participants
-        //{
-        //    get { return _participants; }
-        //    set
-        //    {
-        //        if (_participants != value)
-        //        {
-        //            _participants = value;
-        //            RaisePropertyChanged(nameof(Participants));
-        //        }
-        //    }
-        //}
-
-        //private ObservableCollection<ParticipantModel> _participants  = new ObservableCollection<ParticipantModel>();
     }
 }

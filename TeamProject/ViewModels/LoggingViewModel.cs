@@ -5,7 +5,7 @@ using Windows.UI.Popups;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
-using TeamProject.Services;
+using TestingClasses.Services;
 
 
 namespace TeamProject.ViewModels

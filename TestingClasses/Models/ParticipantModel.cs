@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Storage.Streams;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SQLite.Net.Attributes;
 
-namespace TeamProject.Models
+namespace TestingClasses.Models
 {
     public class ParticipantModel : BaseModel
     {

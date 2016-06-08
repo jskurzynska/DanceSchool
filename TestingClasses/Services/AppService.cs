@@ -1,7 +1,7 @@
 ﻿using System;
 using Windows.Storage;
 
-namespace TeamProject.Services
+namespace TestingClasses.Services
 {
     public static class AppService
     {

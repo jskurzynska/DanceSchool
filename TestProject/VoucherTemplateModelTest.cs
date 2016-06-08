@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-using TeamProject.Models;
+using TestingClasses.Models;
 
 namespace TestProject
 {
@@ -12,13 +12,13 @@ namespace TestProject
         [TestMethod]
         public void DecodeTimeValueTest()
         {
-           var _voucherTemplate = new VoucherTemplateModel()
+           _voucherTemplate = new VoucherTemplateModel()
             {
                 Id = 1,
                 Price = 12.1,
                 Value = "P1Y2M"
             };
-            var expectedValue = "1 rok 2 miesiące";
+            var expectedValue = " 1 rok 2 miesiące";
             var actual = _voucherTemplate.DecodeTimeValue();
             Assert.AreEqual(expectedValue, actual);
         }

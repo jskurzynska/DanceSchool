@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Security;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using TeamProject.Models;
+using TestingClasses.Models;
 
-namespace TeamProject.Services
+namespace TestingClasses.Services
 {
     public class PostDataService: BaseService
     {

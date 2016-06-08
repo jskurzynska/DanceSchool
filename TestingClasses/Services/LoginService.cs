@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Security;
 using System.Threading.Tasks;
 
-namespace TeamProject.Services
+namespace TestingClasses.Services
 {
     public class LoginService : BaseService
     {

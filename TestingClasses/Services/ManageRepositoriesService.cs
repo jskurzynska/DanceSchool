@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using TeamProject.Models;
-using TeamProject.Repositories;
+using Windows.UI.Popups;
+using TestingClasses.Models;
+using TestingClasses.Repositories;
 
-namespace TeamProject.Services
+namespace TestingClasses.Services
 {
     public class ManageRepositoriesService
     {
@@ -34,11 +35,20 @@ namespace TeamProject.Services
         public async Task GetGroups()
         {
             GroupRepository.RemoveAll();
-            ObservableCollection<GroupModel> groups = await _getDataService.GetGroupsInfo();
-            foreach (var groupModel in groups)
+            try
             {
-                GroupRepository.Add(groupModel);
+                ObservableCollection<GroupModel> groups = await _getDataService.GetGroupsInfo();
+                foreach (var groupModel in groups)
+                {
+                    GroupRepository.Add(groupModel);
+                }
             }
+            catch (Exception e)
+            {
+                MessageDialog dialog = new MessageDialog("Sprawdź połączenie z internetem!");
+                await dialog.ShowAsync();
+            }
+           
         }
 
         public bool CheckIfTrainerDataExists()

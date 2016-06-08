@@ -4,7 +4,7 @@ using Windows.Security.Cryptography.Certificates;
 using Windows.Web.Http.Filters;
 using WindowsRuntime.HttpClientFilters;
 
-namespace TeamProject.Services
+namespace TestingClasses.Services
 {
     public abstract class BaseService
     {

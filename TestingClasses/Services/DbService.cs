@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using Windows.Storage;
 using SQLite.Net;
 using SQLite.Net.Platform.WinRT;
-using TeamProject.Models;
+using TestingClasses.Models;
 
-namespace TeamProject.Services
+namespace TestingClasses.Services
 {
     public class DbService
     {
@@ -25,7 +20,6 @@ namespace TeamProject.Services
             {
                 dbConnection.CreateTable<TrainerModel>();
                 dbConnection.CreateTable<GroupModel>();
-                //dbConnection.CreateTable<ParticipantModel>();
             }
         }
 

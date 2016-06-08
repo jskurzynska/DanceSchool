@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Dynamic;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using TeamProject.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
-using TeamProject.Services;
+using TestingClasses.Models;
+using TestingClasses.Services;
 
 namespace TeamProject.ViewModels
 {
@@ -25,8 +24,11 @@ namespace TeamProject.ViewModels
 
         public void GroupsSet()
         {
-            ///TODO: tutaj tez zabezpieczyc zeby sie nie wywalilo
-            Groups = new ObservableCollection<GroupModel>(_manageRepositoriesService.GroupRepository.GetAll());
+            if (_manageRepositoriesService.GroupRepository.GetAll() != null)
+            {
+                Groups = new ObservableCollection<GroupModel>(_manageRepositoriesService.GroupRepository.GetAll());
+            }
+            
         }
 
         private ObservableCollection<GroupModel> _groups = new ObservableCollection<GroupModel>();
