@@ -32,7 +32,7 @@ namespace TestProject
                 Price = 12.1,
                 Value = "P1Y2M"
             };
-            var expectedPrice = "12,10";
+            var expectedPrice = "12,1";
             var actual = _voucherTemplate.ManipulatePrice();
             Assert.AreEqual(expectedPrice,actual);
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using Newtonsoft.Json;
 
 namespace TestingClasses.Models
@@ -45,9 +46,21 @@ namespace TestingClasses.Models
             }
         }
 
+        private string _decodedPriceAndValue;
+
+        public string DecodedPriceAndValue
+        {
+            get { return _decodedPriceAndValue; }
+            set
+            {
+                _decodedPriceAndValue = value;
+                RaisePropertyChanged(nameof(DecodedPriceAndValue));
+            }
+        }
+
         public override string ToString()
         {
-            return $"{DecodeVoucherValue()} - {ManipulatePrice()} zl";
+           return $"{DecodeVoucherValue()} - {ManipulatePrice()} zl";   
         }
 
         public string DecodeVoucherValue()
@@ -58,12 +71,13 @@ namespace TestingClasses.Models
 
         public string ManipulatePrice()
         {
-            var result = Price.ToString().Replace(".", ",");
-            var strings = result.Split(',');
-            if (strings[1].Length < 2)
-            {
-                result += "0";
-            }
+            var result = Price.ToString(CultureInfo.InvariantCulture).Replace(".", ",");
+
+            //var strings = result.Split(',');
+            //if (strings[1].Length < 2)
+            //{
+            //    result += "0";
+            //}
             return result;
         }
 
@@ -102,7 +116,7 @@ namespace TestingClasses.Models
             {
                 result = result.Replace(keyValue.Key, keyValue.Value);
             }
-
+            
             return result;
         }
     }
